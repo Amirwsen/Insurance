@@ -1,4 +1,8 @@
+using Application.UseCases;
+using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Database;
+using infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +15,14 @@ builder.Services.AddDbContext<DatabaseContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
+
+var services = builder.Services;
+services.AddScoped<IInsuranceRepository, InsuranceRepository>();
+services.AddScoped<IInsuranceOrderRepository, InsuranceOrderRepository>();
+services.AddScoped<AddInsuranceUseCase, AddInsuranceUseCase>();
+services.AddScoped<AddInsuranceOrderUseCase, AddInsuranceOrderUseCase>();
 
 var app = builder.Build();
 
