@@ -6,6 +6,6 @@ public class InsuranceOrder
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid InsuranceId { get; set; }
-    public ICollection<InsuranceType> Type { get; set; }
+    public InsuranceType Type { get; set; }
     public int Investment { get; set; }
 }
