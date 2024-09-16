@@ -1,6 +1,7 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Database;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace infrastructure.Repositories;
 
@@ -17,7 +18,8 @@ public class InsuranceOrderRepository : IInsuranceOrderRepository
         var result = new InsuranceOrder
         {
             Investment = request.Investment,
-            Type = request.Type
+            Type = request.Type,
+            InsuranceId = request.InsuranceId
         };
         await _database.InsuranceOrders.AddAsync(result, cancellationToken);
         await _database.SaveChangesAsync(cancellationToken);

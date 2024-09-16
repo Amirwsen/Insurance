@@ -17,7 +17,7 @@ public class InsuranceRepository : IInsuranceRepository
     {
         var result = new Insurance
         {
-            Title = request.Title
+            Title = request.Title,
         };
        await _database.Insurances.AddAsync(result, cancellationToken);
        await _database.SaveChangesAsync(cancellationToken);

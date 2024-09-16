@@ -5,7 +5,6 @@ using infrastructure.Repositories;
 namespace Insurance.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
 public class InsuranceController : ControllerBase
 {
     private readonly AddInsuranceUseCase _insuranceUsecase;

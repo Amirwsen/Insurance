@@ -1,12 +1,19 @@
 using Application.UseCases;
-using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Database;
 using infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+var mvcBuilder = builder.Services.AddControllers();
+
+mvcBuilder.AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -16,7 +23,7 @@ builder.Services.AddDbContext<DatabaseContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
+builder.Services.AddSwaggerGenNewtonsoftSupport();
 
 var services = builder.Services;
 services.AddScoped<IInsuranceRepository, InsuranceRepository>();
