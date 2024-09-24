@@ -4,6 +4,7 @@ using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240924121324_Change Investment Type to double")]
+    partial class ChangeInvestmentTypetodouble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +49,9 @@ namespace infrastructure.Database.Migrations
                     b.Property<Guid>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("InsuranceId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<double>("Investment")
                         .HasColumnType("float");
 
@@ -56,16 +62,22 @@ namespace infrastructure.Database.Migrations
 
                     b.HasIndex("InsuranceId");
 
+                    b.HasIndex("InsuranceId1");
+
                     b.ToTable("InsuranceOrders");
                 });
 
             modelBuilder.Entity("Domain.Entities.InsuranceOrder", b =>
                 {
-                    b.HasOne("Domain.Entities.Insurance", "Insurance")
+                    b.HasOne("Domain.Entities.Insurance", null)
                         .WithMany("InsuranceOrders")
                         .HasForeignKey("InsuranceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Entities.Insurance", "Insurance")
+                        .WithMany()
+                        .HasForeignKey("InsuranceId1");
 
                     b.Navigation("Insurance");
                 });

@@ -6,5 +6,5 @@ public class InsuranceOrderRequest
 {
     public Guid InsuranceId { get; set; }
     public InsuranceType Type { get; set; }
-    public int Investment { get; set; }
+    public double Investment { get; set; }
 }

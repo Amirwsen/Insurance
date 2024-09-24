@@ -30,6 +30,7 @@ services.AddScoped<IInsuranceRepository, InsuranceRepository>();
 services.AddScoped<IInsuranceOrderRepository, InsuranceOrderRepository>();
 services.AddScoped<AddInsuranceUseCase, AddInsuranceUseCase>();
 services.AddScoped<AddInsuranceOrderUseCase, AddInsuranceOrderUseCase>();
+services.AddScoped<GetOrdersUseCase, GetOrdersUseCase>();
 
 var app = builder.Build();
 

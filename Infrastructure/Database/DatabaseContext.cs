@@ -20,16 +20,10 @@ public class DatabaseContext : DbContext
 
         builder.Entity<Insurance>()
             .HasMany(x => x.InsuranceOrders)
-            .WithOne()
+            .WithOne(order => order.Insurance)
             .HasForeignKey(x => x.InsuranceId)
             .IsRequired();
-
-        // builder.Entity<InsuranceOrder>()
-        //     .HasCheckConstraint("CheckSurgery", "Surgery >= 5000 AND Surgery <= 500000000");
-        // builder.Entity<InsuranceOrder>()
-        //     .HasCheckConstraint("CheckDentistry", "Dentistry >= 4000 AND Dentistry <= 400000000");
-        // builder.Entity<InsuranceOrder>()
-        //     .HasCheckConstraint("CheckHospitalized", "Hospitalized >= 2000 AND Hospitalized <= 200000000");
+        // builder.Entity<InsuranceOrder>().HasQueryFilter(x => x.Type == InsuranceType.Dentistry);
 
         base.OnModelCreating(builder);
     }
