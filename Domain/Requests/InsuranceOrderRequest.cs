@@ -5,6 +5,7 @@ namespace infrastructure.Repositories;
 
 public class InsuranceOrderRequest
 {
+    //Use Insurance GUID To Add An Order
     public Guid InsuranceId { get; set; }
     [Required]
     public InsuranceType Type { get; set; }

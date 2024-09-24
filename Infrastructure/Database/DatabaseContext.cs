@@ -23,7 +23,6 @@ public class DatabaseContext : DbContext
             .WithOne(order => order.Insurance)
             .HasForeignKey(x => x.InsuranceId)
             .IsRequired();
-        // builder.Entity<InsuranceOrder>().HasQueryFilter(x => x.Type == InsuranceType.Dentistry);
 
         base.OnModelCreating(builder);
     }
